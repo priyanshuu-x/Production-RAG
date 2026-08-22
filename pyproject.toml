@@ -1,0 +1,12 @@
+dependencies = [
+    "fastapi",
+    "uvicorn",
+    "streamlit",
+    "python-dotenv",
+    "pydantic",
+    "arxiv",
+    "pymupdf",
+    "sentence-transformers",
+    "qdrant-client",
+    "rank-bm25",
+]
