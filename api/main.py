@@ -1,6 +1,7 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends
 from pydantic import BaseModel
 from caching.cache import get_cached_response, set_cached_response
+from api.rate_limit import check_rate_limit
 
 from retrieval.hybrid_search import load_chunks, build_bm25_index
 from retrieval.rerank import hybrid_search_with_rerank
@@ -42,7 +43,7 @@ def health_check():
 
 
 @app.post("/query", response_model=QueryResponse)
-def query(request: QueryRequest):
+def query(request: QueryRequest, _: None = Depends(check_rate_limit)):
     cached = get_cached_response(request.question)
     if cached:
         return QueryResponse(**cached)
