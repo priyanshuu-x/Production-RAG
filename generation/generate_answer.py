@@ -39,16 +39,20 @@ Question: {query}
 
 Answer:"""
 
-    response = client.chat.completions.create(
-        model=GENERATION_MODEL,
-        messages=[{"role": "user", "content": prompt}],
-        temperature=0.2,
-        max_tokens=1500,
-        reasoning_effort="low",
-    )
+    try:
+        response = client.chat.completions.create(
+            model=GENERATION_MODEL,
+            messages=[{"role": "user", "content": prompt}],
+            temperature=0.2,
+            max_tokens=1500,
+            reasoning_effort="low",
+        )
+        content = response.choices[0].message.content
+        answer = content.strip() if content else "I couldn't generate an answer. Please try again."
+    except Exception as e:
+        answer = "Something went wrong while generating the answer. Please try again shortly."
+        print(f"ERROR in generate_answer: {e}")  # logged server-side for debugging
 
-    content = response.choices[0].message.content
-    answer = content.strip() if content else ""
     return answer, citation_map
 
 

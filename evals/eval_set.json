@@ -1,0 +1,12 @@
+[
+  {
+    "question": "What is retrieval augmented generation?",
+    "relevant_paper_ids": ["2601.05264v1", "2411.18583v1"],
+    "expected_topics": "Definition of RAG, combining retrieval with LLM generation, reducing hallucination"
+  },
+  {
+    "question": "How is RAG evaluated?",
+    "relevant_paper_ids": ["2309.15217v2"],
+    "expected_topics": "Automated evaluation metrics for RAG systems, faithfulness, relevance"
+  }
+]

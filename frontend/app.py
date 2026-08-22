@@ -1,8 +1,10 @@
 import streamlit as st
 import requests
+import os
 import markdown as md
 
-API_URL = "http://127.0.0.1:8000/query"
+API_KEY = os.getenv("PAPERMIND_API_KEY", "rag")
+API_URL = os.getenv("API_URL", "http://127.0.0.1:8000/query")
 
 st.set_page_config(page_title="PaperMind", page_icon="📄", layout="wide")
 
@@ -131,6 +133,7 @@ if ask_clicked and question:
         response = requests.post(
             API_URL,
             json={"question": question, "top_k": 5},
+            headers={"X-API-Key": API_KEY},
         )
 
     if response.status_code == 200:

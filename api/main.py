@@ -1,5 +1,6 @@
 from fastapi import FastAPI, Depends, HTTPException
 from pydantic import BaseModel
+from api.auth import verify_api_key
 from caching.cache import get_cached_response, set_cached_response
 from api.rate_limit import check_rate_limit
 
@@ -48,41 +49,48 @@ def health_check():
 
 
 @app.post("/query", response_model=QueryResponse)
-def query(request: QueryRequest, _: None = Depends(check_rate_limit)):
-    has_pii, pii_type = contains_pii(request.question)
-    if has_pii:
-        raise HTTPException(status_code=400, detail=f"Question appears to contain personal information ({pii_type}). Please rephrase without it.")
+def query(request: QueryRequest, _: None = Depends(check_rate_limit), __: None = Depends(verify_api_key),):
+    try:
+        has_pii, pii_type = contains_pii(request.question)
+        if has_pii:
+            raise HTTPException(status_code=400, detail=f"Question appears to contain personal information ({pii_type}). Please rephrase without it.")
 
-    is_injection, matched_phrase = contains_injection_attempt(request.question)
-    if is_injection:
-        raise HTTPException(status_code=400, detail="This question could not be processed.")
+        is_injection, matched_phrase = contains_injection_attempt(request.question)
+        if is_injection:
+            raise HTTPException(status_code=400, detail="This question could not be processed.")
 
-    if not is_on_topic(request.question):
-        raise HTTPException(status_code=400, detail="This question doesn't appear to be related to the papers in this system. Try asking about RAG, retrieval, or related AI/ML topics.")
+        if not is_on_topic(request.question):
+            raise HTTPException(status_code=400, detail="This question doesn't appear to be related to the papers in this system. Try asking about RAG, retrieval, or related AI/ML topics.")
 
-    cached = get_cached_response(request.question)
-    if cached:
-        return QueryResponse(**cached)
+        cached = get_cached_response(request.question)
+        if cached:
+            return QueryResponse(**cached)
 
-    results = hybrid_search_with_rerank(
-        request.question, bm25, chunks, chunk_lookup, final_top_k=request.top_k,
-    )
+        results = hybrid_search_with_rerank(
+            request.question, bm25, chunks, chunk_lookup, final_top_k=request.top_k,
+        )
 
-    answer, citation_map = generate_answer(request.question, results)
+        answer, citation_map = generate_answer(request.question, results)
 
-    if not has_citation(answer):
-        answer += "\n\n*(Note: this answer may not be fully grounded in the source papers.)*"
+        if not has_citation(answer):
+            answer += "\n\n*(Note: this answer may not be fully grounded in the source papers.)*"
 
-    sources = [
-        SourceInfo(citation_number=num, paper_id=info["paper_id"], chunk_id=info["chunk_id"])
-        for num, info in citation_map.items()
-    ]
+        sources = [
+            SourceInfo(citation_number=num, paper_id=info["paper_id"], chunk_id=info["chunk_id"])
+            for num, info in citation_map.items()
+        ]
 
-    response_data = {
-        "question": request.question,
-        "answer": answer,
-        "sources": [s.model_dump() for s in sources],
-    }
+        response_data = {
+            "question": request.question,
+            "answer": answer,
+            "sources": [s.model_dump() for s in sources],
+        }
 
-    set_cached_response(request.question, response_data)
-    return QueryResponse(**response_data)
+        set_cached_response(request.question, response_data)
+        return QueryResponse(**response_data)
+
+    except HTTPException:
+        raise  # let intentional guardrail/rate-limit errors pass through unchanged
+    except Exception as e:
+        print(f"ERROR in /query endpoint: {e}")
+        raise HTTPException(status_code=500, detail="An unexpected error occurred while processing your request.")
