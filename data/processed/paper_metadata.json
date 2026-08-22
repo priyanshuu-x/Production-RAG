@@ -1,158 +1,170 @@
 {
-  "2608.20335v1": {
-    "title": "4DAnyone: Create Anyone in 4D from a Casual Monocular Video",
-    "published": "2026-08-20",
+  "2506.06962v3": {
+    "title": "AR-RAG: Autoregressive Retrieval Augmentation for Image Generation",
+    "published": "2025-06-08",
     "categories": [
       "cs.CV"
     ]
   },
-  "2608.20336v1": {
-    "title": "WithEveryone: Unified Planning and Identity Grounding for Group Image Generation",
-    "published": "2026-08-20",
+  "2504.13684v1": {
+    "title": "Intelligent Interaction Strategies for Context-Aware Cognitive Augmentation",
+    "published": "2025-04-18",
     "categories": [
-      "cs.CV"
+      "cs.HC"
     ]
   },
-  "2608.20334v1": {
-    "title": "Swift-Image: Exploring the Performance Frontier of Compact Unified Image Generation Models",
-    "published": "2026-08-20",
+  "2504.17204v1": {
+    "title": "Factually: Exploring Wearable Fact-Checking for Augmented Truth Discernment",
+    "published": "2025-04-24",
     "categories": [
-      "cs.CV"
+      "cs.HC",
+      "cs.ET"
     ]
   },
-  "2608.20332v1": {
-    "title": "A Protocol for Shielding-Enhanced Loading of Single Polar Molecules into Optical Tweezers",
-    "published": "2026-08-20",
+  "2504.14689v1": {
+    "title": "Designing AI Systems that Augment Human Performed vs. Demonstrated Critical Thinking",
+    "published": "2025-04-20",
     "categories": [
-      "physics.atom-ph",
-      "cond-mat.quant-gas",
-      "quant-ph"
+      "cs.HC"
     ]
   },
-  "2608.20331v1": {
-    "title": "G-CARL: Grounded Checklist-Aligned Reward Learning for Patient-Oriented Medical Report Interpretation",
-    "published": "2026-08-20",
+  "2411.18583v1": {
+    "title": "Automated Literature Review Using NLP Techniques and LLM-Based Retrieval-Augmented Generation",
+    "published": "2024-11-27",
     "categories": [
       "cs.CL",
       "cs.AI",
-      "cs.CV"
-    ]
-  },
-  "2608.20327v1": {
-    "title": "Competing triangular and stripe supersolid orders in a dipolar quantum gas",
-    "published": "2026-08-20",
-    "categories": [
-      "cond-mat.quant-gas",
-      "physics.atom-ph",
-      "quant-ph"
-    ]
-  },
-  "2608.20326v1": {
-    "title": "$TCP_\u03b1$: Margin-Controlled Confidence estimation for reliable Music Information Retrieval",
-    "published": "2026-08-20",
-    "categories": [
-      "eess.AS",
+      "cs.IR",
       "cs.LG"
     ]
   },
-  "2608.20322v1": {
-    "title": "A comparison between ceiling-mounted FMCW, IR-UWB and Wi-Fi radar for in-bedroom human activity monitoring and sleep interruption detection",
-    "published": "2026-08-20",
+  "2605.12335v1": {
+    "title": "EHR-RAGp: Retrieval-Augmented Prototype-Guided Foundation Model for Electronic Health Records",
+    "published": "2026-05-12",
     "categories": [
-      "cs.LG"
-    ]
-  },
-  "2608.20320v1": {
-    "title": "An Agentic Approach for Active Data Collection, Travel Behavior Modeling, and Weather-Sensitive Demand Prediction",
-    "published": "2026-08-20",
-    "categories": [
+      "cs.IR",
       "cs.AI",
+      "cs.LG"
+    ]
+  },
+  "2402.12317v2": {
+    "title": "EVOR: Evolving Retrieval for Code Generation",
+    "published": "2024-02-19",
+    "categories": [
+      "cs.CL",
+      "cs.AI"
+    ]
+  },
+  "2502.00306v2": {
+    "title": "Riddle Me This! Stealthy Membership Inference for Retrieval-Augmented Generation",
+    "published": "2025-02-01",
+    "categories": [
+      "cs.CR",
+      "cs.AI",
+      "cs.CL",
+      "cs.IR",
+      "cs.LG"
+    ]
+  },
+  "2309.15217v2": {
+    "title": "Ragas: Automated Evaluation of Retrieval Augmented Generation",
+    "published": "2023-09-26",
+    "categories": [
       "cs.CL"
     ]
   },
-  "2608.20317v1": {
-    "title": "Projecting BrowseComp-Plus onto ClimbMix: Toward More Realistic Corpora for Agentic Search",
-    "published": "2026-08-20",
+  "2507.23334v2": {
+    "title": "MUST-RAG: MUSical Text Question Answering with Retrieval Augmented Generation",
+    "published": "2025-07-31",
+    "categories": [
+      "cs.CL",
+      "cs.AI",
+      "cs.IR",
+      "cs.LG"
+    ]
+  },
+  "2601.05264v1": {
+    "title": "Engineering the RAG Stack: A Comprehensive Review of the Architecture and Trust Frameworks for Retrieval-Augmented Generation Systems",
+    "published": "2025-11-07",
+    "categories": [
+      "cs.IR",
+      "cs.AI"
+    ]
+  },
+  "2510.22344v1": {
+    "title": "FAIR-RAG: Faithful Adaptive Iterative Refinement for Retrieval-Augmented Generation",
+    "published": "2025-10-25",
+    "categories": [
+      "cs.CL",
+      "cs.AI",
+      "cs.IR"
+    ]
+  },
+  "2601.11863v1": {
+    "title": "Utilizing Metadata for Better Retrieval-Augmented Generation",
+    "published": "2026-01-17",
+    "categories": [
+      "cs.IR",
+      "cs.AI",
+      "cs.CE",
+      "cs.CL"
+    ]
+  },
+  "1811.08772v1": {
+    "title": "Overcoming low-utility facets for complex answer retrieval",
+    "published": "2018-11-21",
     "categories": [
       "cs.IR"
     ]
   },
-  "2608.20316v1": {
-    "title": "Pandora's AI Model Routing Box: Efficient Allocation with Costly Value Estimation",
-    "published": "2026-08-20",
+  "2512.24268v1": {
+    "title": "RAGPart & RAGMask: Retrieval-Stage Defenses Against Corpus Poisoning in Retrieval-Augmented Generation",
+    "published": "2025-12-30",
     "categories": [
-      "cs.AI"
+      "cs.IR"
     ]
   },
-  "2608.20315v1": {
-    "title": "Explainable Transformer Models for Clinical Prediction Tasks on Structured Electronic Health Records",
-    "published": "2026-08-20",
+  "2504.05181v2": {
+    "title": "Lightweight and Direct Document Relevance Optimization for Generative Information Retrieval",
+    "published": "2025-04-07",
     "categories": [
+      "cs.IR",
+      "cs.AI",
+      "cs.DL",
       "cs.LG"
     ]
   },
-  "2608.20314v1": {
-    "title": "MidTool: Mid-training Data Synthesis for Agentic Tool Use",
-    "published": "2026-08-20",
+  "2602.07525v1": {
+    "title": "IGMiRAG: Intuition-Guided Retrieval-Augmented Generation with Adaptive Mining of In-Depth Memory",
+    "published": "2026-02-07",
     "categories": [
-      "cs.AI"
+      "cs.IR"
     ]
   },
-  "2608.20312v1": {
-    "title": "Inter-X++: A Comprehensive Benchmark for Multimodal Human-Human Interaction Analysis",
-    "published": "2026-08-20",
+  "2411.00744v2": {
+    "title": "CARROT: A Learned Cost-Constrained Retrieval Optimization System for RAG",
+    "published": "2024-11-01",
     "categories": [
-      "cs.CV"
+      "cs.DB",
+      "cs.CL",
+      "cs.IR"
     ]
   },
-  "2608.20309v1": {
-    "title": "The Additive Arithmetic of Linear Orders",
-    "published": "2026-08-20",
+  "2504.19754v1": {
+    "title": "Reconstructing Context: Evaluating Advanced Chunking Strategies for Retrieval-Augmented Generation",
+    "published": "2025-04-28",
     "categories": [
-      "math.LO"
+      "cs.IR",
+      "cs.AI",
+      "cs.CL"
     ]
   },
-  "2608.20306v1": {
-    "title": "Computational Methods of Wave Propagation for Semiclassical Models of High Harmonic Generation in Bulk Solids",
-    "published": "2026-08-20",
+  "2604.23584v1": {
+    "title": "Identity-Decoupled Anonymization for Visual Evidence in Multi-modal Retrieval-Augmented Generation",
+    "published": "2026-04-26",
     "categories": [
-      "physics.optics",
-      "physics.chem-ph"
-    ]
-  },
-  "2608.20302v1": {
-    "title": "Coherent states in quantum billiards constructed in the basis of the continued eigenfunctions",
-    "published": "2026-08-20",
-    "categories": [
-      "nlin.CD",
-      "quant-ph"
-    ]
-  },
-  "2608.20294v1": {
-    "title": "QED radiative effects in semi-inclusive deep-inelastic scattering: traditional and factorized approaches",
-    "published": "2026-08-20",
-    "categories": [
-      "hep-ph",
-      "hep-ex",
-      "nucl-ex",
-      "nucl-th"
-    ]
-  },
-  "2608.20291v1": {
-    "title": "Programmable cavity QED with a fiber-integrated atomic array",
-    "published": "2026-08-20",
-    "categories": [
-      "quant-ph",
-      "cond-mat.quant-gas",
-      "physics.atom-ph"
-    ]
-  },
-  "2608.20289v1": {
-    "title": "Spectral Viterbo isomorphism: complex-oriented versus framed",
-    "published": "2026-08-20",
-    "categories": [
-      "math.SG",
-      "math.AT"
+      "cs.CV",
+      "cs.IR"
     ]
   }
 }

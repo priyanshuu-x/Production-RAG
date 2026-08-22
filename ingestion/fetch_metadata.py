@@ -8,7 +8,7 @@ client = arxiv.Client()
 search = arxiv.Search(
     query="retrieval augmented generation",
     max_results=20,
-    sort_by=arxiv.SortCriterion.SubmittedDate
+    sort_by=arxiv.SortCriterion.Relevance  
 )
 
 metadata = {}

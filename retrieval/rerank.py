@@ -26,14 +26,10 @@ def rerank(query, candidates, top_k=5):
     return reranked[:top_k]
 
 
-from retrieval.hybrid_search import dense_search_with_hyde  
+from retrieval.hybrid_search import dense_search_with_rewrite  
 
-def hybrid_search_with_rerank(query, bm25, chunks, chunk_lookup, fusion_top_k=20, final_top_k=5, use_hyde=False):
-    if use_hyde:
-        dense_ids = dense_search_with_hyde(query, top_k=fusion_top_k)
-    else:
-        dense_ids = dense_search(query, top_k=fusion_top_k)
-
+def hybrid_search_with_rerank(query, bm25, chunks, chunk_lookup, fusion_top_k=20, final_top_k=5):
+    dense_ids = dense_search_with_rewrite(query, top_k=fusion_top_k)
     sparse_ids = sparse_search(query, bm25, chunks, top_k=fusion_top_k)
     fused = reciprocal_rank_fusion(dense_ids, sparse_ids)
 

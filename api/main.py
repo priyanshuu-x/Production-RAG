@@ -20,7 +20,6 @@ metadata = load_metadata()
 
 class QueryRequest(BaseModel):
     question: str
-    use_hyde: bool = False
     top_k: int = 5
 
 
@@ -49,14 +48,13 @@ def query(request: QueryRequest):
         chunks,
         chunk_lookup,
         final_top_k=request.top_k,
-        use_hyde=request.use_hyde,
     )
 
     answer, citation_map = generate_answer(request.question, results)
 
     sources = [
-    SourceInfo(citation_number=num, paper_id=info["paper_id"], chunk_id=info["chunk_id"])
-    for num, info in citation_map.items()
-]
+        SourceInfo(citation_number=num, paper_id=info["paper_id"], chunk_id=info["chunk_id"])
+        for num, info in citation_map.items()
+    ]
 
     return QueryResponse(question=request.question, answer=answer, sources=sources)

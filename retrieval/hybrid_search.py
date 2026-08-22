@@ -88,14 +88,11 @@ if __name__ == "__main__":
         print(f"Paper: {r['paper_id']}")
         print(f"Text: {r['text'][:200]}...")
 
-from retrieval.hyde import generate_hypothetical_answer
+from retrieval.query_rewrite import rewrite_query
 
-def dense_search_with_hyde(query, top_k=20):
-    """
-    Same as dense_search, but embeds a hypothetical answer instead of the raw query.
-    """
-    hypothetical = generate_hypothetical_answer(query)
-    query_vector = model.encode(hypothetical).tolist()
+def dense_search_with_rewrite(query, top_k=20):
+    rewritten = rewrite_query(query)
+    query_vector = model.encode(rewritten).tolist()
     response = client.query_points(
         collection_name=COLLECTION_NAME,
         query=query_vector,
