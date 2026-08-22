@@ -26,12 +26,17 @@ def rerank(query, candidates, top_k=5):
     return reranked[:top_k]
 
 
-def hybrid_search_with_rerank(query, bm25, chunks, chunk_lookup, fusion_top_k=20, final_top_k=5):
-    dense_ids = dense_search(query, top_k=fusion_top_k)
+from retrieval.hybrid_search import dense_search_with_hyde  
+
+def hybrid_search_with_rerank(query, bm25, chunks, chunk_lookup, fusion_top_k=20, final_top_k=5, use_hyde=False):
+    if use_hyde:
+        dense_ids = dense_search_with_hyde(query, top_k=fusion_top_k)
+    else:
+        dense_ids = dense_search(query, top_k=fusion_top_k)
+
     sparse_ids = sparse_search(query, bm25, chunks, top_k=fusion_top_k)
     fused = reciprocal_rank_fusion(dense_ids, sparse_ids)
 
-    # take a wider pool from fusion, then let the reranker pick the true top_k
     candidates = []
     for chunk_id, rrf_score in fused[:fusion_top_k]:
         candidates.append({
@@ -42,7 +47,6 @@ def hybrid_search_with_rerank(query, bm25, chunks, chunk_lookup, fusion_top_k=20
         })
 
     return rerank(query, candidates, top_k=final_top_k)
-
 
 
 from retrieval.metadata_filter import load_metadata, filter_by_date, filter_by_paper_id
@@ -56,7 +60,6 @@ if __name__ == "__main__":
     query = "what is retrieval augmented generation"
     results = hybrid_search_with_rerank(query, bm25, chunks, chunk_lookup, fusion_top_k=20, final_top_k=10)
 
-    # only keep papers published after 2025-08-01, as an example filter
     filtered_results = filter_by_paper_id(results, paper_ids=["2608.20316v1"])
 
     for r in filtered_results[:5]:
@@ -65,3 +68,24 @@ if __name__ == "__main__":
         print(f"\nRerank Score: {r['rerank_score']:.4f}  | Published: {pub_date}")
         print(f"Title: {title}")
         print(f"Text: {r['text'][:200]}...")
+
+if __name__ == "__main__":
+    chunks = load_chunks()
+    chunk_lookup = {chunk["chunk_id"]: chunk for chunk in chunks}
+    bm25 = build_bm25_index(chunks)
+
+    query = "how do models avoid making things up when answering questions"
+
+    print("=== WITHOUT HyDE ===")
+    results_normal = hybrid_search_with_rerank(query, bm25, chunks, chunk_lookup, use_hyde=False)
+    for r in results_normal[:3]:
+        print(f"\nRerank Score: {r['rerank_score']:.4f}")
+        print(f"Paper: {r['paper_id']}")
+        print(f"Text: {r['text'][:150]}...")
+
+    print("\n\n=== WITH HyDE ===")
+    results_hyde = hybrid_search_with_rerank(query, bm25, chunks, chunk_lookup, use_hyde=True)
+    for r in results_hyde[:3]:
+        print(f"\nRerank Score: {r['rerank_score']:.4f}")
+        print(f"Paper: {r['paper_id']}")
+        print(f"Text: {r['text'][:150]}...")

@@ -87,3 +87,18 @@ if __name__ == "__main__":
         print(f"\nRRF Score: {r['rrf_score']:.4f}")
         print(f"Paper: {r['paper_id']}")
         print(f"Text: {r['text'][:200]}...")
+
+from retrieval.hyde import generate_hypothetical_answer
+
+def dense_search_with_hyde(query, top_k=20):
+    """
+    Same as dense_search, but embeds a hypothetical answer instead of the raw query.
+    """
+    hypothetical = generate_hypothetical_answer(query)
+    query_vector = model.encode(hypothetical).tolist()
+    response = client.query_points(
+        collection_name=COLLECTION_NAME,
+        query=query_vector,
+        limit=top_k,
+    )
+    return [point.payload["chunk_id"] for point in response.points]
