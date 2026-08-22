@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
+from caching.cache import get_cached_response, set_cached_response
 
 from retrieval.hybrid_search import load_chunks, build_bm25_index
 from retrieval.rerank import hybrid_search_with_rerank
@@ -42,6 +43,10 @@ def health_check():
 
 @app.post("/query", response_model=QueryResponse)
 def query(request: QueryRequest):
+    cached = get_cached_response(request.question)
+    if cached:
+        return QueryResponse(**cached)
+
     results = hybrid_search_with_rerank(
         request.question,
         bm25,
@@ -57,4 +62,12 @@ def query(request: QueryRequest):
         for num, info in citation_map.items()
     ]
 
-    return QueryResponse(question=request.question, answer=answer, sources=sources)
+    response_data = {
+        "question": request.question,
+        "answer": answer,
+        "sources": [s.model_dump() for s in sources],
+    }
+
+    set_cached_response(request.question, response_data)
+
+    return QueryResponse(**response_data)
